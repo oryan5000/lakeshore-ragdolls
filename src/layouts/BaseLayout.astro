@@ -22,7 +22,9 @@ const { seo, class: className } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <SEO {...seo} />
+    <SEO {...seo}>
+      <slot name="schema" />
+    </SEO>
   </head>
   <body class={`flex flex-col min-h-screen bg-brand-bg ${className || ''}`}>
     <Header />

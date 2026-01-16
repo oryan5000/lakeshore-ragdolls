@@ -1,40 +1,19 @@
 ---
-import type { NavItem } from '../../lib/types';
-
-const navItems: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Cats', href: '/cats' },
-  { label: 'Available Kittens', href: '/kittens' },
-  { label: 'Gallery', href: '/gallery' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-];
+import { navItems, isActivePath } from '../../lib/navigation';
 
 const currentPath = Astro.url.pathname;
 ---
 
 <nav class="hidden md:flex items-center gap-6">
-  {navItems.map((item) => {
-    const isActive = currentPath === item.href ||
-      (item.href !== '/' && currentPath.startsWith(item.href));
-
-    return (
-      <a
-        href={item.href}
-        class:list={[
-          'text-sm font-medium transition-colors hover:text-brand-primary',
-          isActive ? 'text-brand-primary' : 'text-brand-text',
-        ]}
-      >
-        {item.label}
-      </a>
-    );
-  })}
+  {navItems.map((item) => (
+    <a
+      href={item.href}
+      class:list={[
+        'text-sm font-medium transition-colors hover:text-brand-primary',
+        isActivePath(currentPath, item.href) ? 'text-brand-primary' : 'text-brand-text',
+      ]}
+    >
+      {item.label}
+    </a>
+  ))}
 </nav>
-
-<!-- Export nav items for mobile menu -->
-<script define:vars={{ navItems }}>
-  window.__NAV_ITEMS__ = navItems;
-</script>

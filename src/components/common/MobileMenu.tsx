@@ -1,20 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface NavItem {
-  label: string;
-  href: string;
-}
-
-const navItems: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Cats', href: '/cats' },
-  { label: 'Available Kittens', href: '/kittens' },
-  { label: 'Gallery', href: '/gallery' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-];
+import { navItems, isActivePath } from '../../lib/navigation';
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,10 +25,6 @@ export default function MobileMenu() {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
-
-  const isActive = (href: string) => {
-    return currentPath === href || (href !== '/' && currentPath.startsWith(href));
-  };
 
   return (
     <div className="md:hidden">
@@ -100,7 +81,7 @@ export default function MobileMenu() {
                   <a
                     href={item.href}
                     className={`block px-6 py-3 text-sm font-medium transition-colors ${
-                      isActive(item.href)
+                      isActivePath(currentPath, item.href)
                         ? 'text-brand-primary bg-brand-bg-alt'
                         : 'text-brand-text hover:text-brand-primary hover:bg-brand-bg'
                     }`}

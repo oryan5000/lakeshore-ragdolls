@@ -19,7 +19,8 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://lakeshoreragdolls.co
 const siteName = 'Lakeshore Ragdolls';
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-default.jpg`;
+// Only set ogImage if image is provided - don't default to non-existent file
+const ogImage = image ? new URL(image, siteUrl).href : null;
 
 // LocalBusiness schema (site-wide)
 const localBusinessSchema = {
@@ -51,14 +52,14 @@ const localBusinessSchema = {
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-<meta property="og:image" content={ogImage} />
+{ogImage && <meta property="og:image" content={ogImage} />}
 <meta property="og:locale" content="en_US" />
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
 
 {/* Article-specific meta */}
 {type === 'article' && publishedDate && (

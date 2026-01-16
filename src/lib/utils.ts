@@ -13,12 +13,24 @@ export function slugify(text: string): string {
 }
 
 /**
+ * Check if a date is valid
+ */
+export function isValidDate(date: Date): boolean {
+  return date instanceof Date && !isNaN(date.getTime());
+}
+
+/**
  * Format a date string for display
+ * Returns empty string for null/undefined/invalid dates
  */
 export function formatDate(dateString: string | null, options?: Intl.DateTimeFormatOptions): string {
   if (!dateString) return '';
 
   const date = new Date(dateString);
+
+  // Guard against invalid dates
+  if (!isValidDate(date)) return '';
+
   const defaultOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
@@ -30,11 +42,16 @@ export function formatDate(dateString: string | null, options?: Intl.DateTimeFor
 
 /**
  * Calculate age from date of birth
+ * Returns empty string for null/undefined/invalid dates
  */
 export function calculateAge(dob: string | null): string {
   if (!dob) return '';
 
   const birthDate = new Date(dob);
+
+  // Guard against invalid dates
+  if (!isValidDate(birthDate)) return '';
+
   const today = new Date();
 
   let years = today.getFullYear() - birthDate.getFullYear();
