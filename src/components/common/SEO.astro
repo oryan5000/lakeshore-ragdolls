@@ -71,7 +71,7 @@ const localBusinessSchema = {
 )}
 
 <!-- Schema.org LocalBusiness (site-wide) -->
-<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
 <!-- Additional schema slot for page-specific structured data -->
 <slot />
