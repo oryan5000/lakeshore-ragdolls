@@ -1,16 +1,89 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const seo = {
+  title: 'Lakeshore Ragdolls',
+  description: 'TICA registered Ragdoll cat breeder in Wauwatosa, Wisconsin. Beautiful, healthy, and well-socialized Ragdoll kittens available.',
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout seo={seo}>
+  <!-- Hero Section (Placeholder) -->
+  <section class="bg-brand-bg-alt py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-brand-text mb-6">
+        Welcome to Lakeshore Ragdolls
+      </h1>
+      <p class="text-xl text-brand-text-light max-w-2xl mx-auto mb-8">
+        TICA registered Ragdoll breeder in Wauwatosa, Wisconsin. We raise beautiful, healthy, and well-socialized Ragdoll kittens with love.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/kittens"
+          class="inline-block px-8 py-3 bg-brand-primary text-brand-text font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors"
+        >
+          View Available Kittens
+        </a>
+        <a
+          href="/waitlist"
+          class="inline-block px-8 py-3 border-2 border-brand-primary text-brand-text font-semibold rounded-lg hover:bg-brand-primary/10 transition-colors"
+        >
+          Join Our Waitlist
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Placeholder Content -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-brand-text mb-4">
+          Foundation Setup Complete
+        </h2>
+        <p class="text-brand-text-light max-w-xl mx-auto">
+          This is a placeholder home page. The design for this page will be discussed and implemented in the next phase.
+        </p>
+      </div>
+
+      <!-- Feature Cards (Placeholder) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="bg-brand-white p-6 rounded-xl shadow-sm border border-brand-border">
+          <div class="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-brand-text mb-2">Raised with Love</h3>
+          <p class="text-brand-text-light text-sm">
+            Our kittens are raised in our home with plenty of love, socialization, and care.
+          </p>
+        </div>
+
+        <div class="bg-brand-white p-6 rounded-xl shadow-sm border border-brand-border">
+          <div class="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-brand-text mb-2">Health Tested</h3>
+          <p class="text-brand-text-light text-sm">
+            All our breeding cats are health tested for HCM, PKD, and other genetic conditions.
+          </p>
+        </div>
+
+        <div class="bg-brand-white p-6 rounded-xl shadow-sm border border-brand-border">
+          <div class="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-brand-text mb-2">TICA Registered</h3>
+          <p class="text-brand-text-light text-sm">
+            We are a TICA registered cattery with documented pedigrees for all our cats.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

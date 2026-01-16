@@ -1,0 +1,76 @@
+---
+import type { SEOProps } from '../../lib/types';
+
+interface Props extends SEOProps {}
+
+const {
+  title,
+  description,
+  image,
+  canonicalUrl,
+  type = 'website',
+  publishedDate,
+  modifiedDate,
+  author,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://lakeshoreragdolls.com';
+const siteName = 'Lakeshore Ragdolls';
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-default.jpg`;
+
+// LocalBusiness schema (site-wide)
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  'name': siteName,
+  'description': 'TICA registered Ragdoll cat breeder in Wauwatosa, Wisconsin',
+  'url': siteUrl,
+  'address': {
+    '@type': 'PostalAddress',
+    'addressLocality': 'Wauwatosa',
+    'addressRegion': 'WI',
+    'addressCountry': 'US',
+  },
+  'telephone': import.meta.env.PUBLIC_BUSINESS_PHONE || '',
+  'email': import.meta.env.PUBLIC_BUSINESS_EMAIL || '',
+};
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{/* Article-specific meta */}
+{type === 'article' && publishedDate && (
+  <>
+    <meta property="article:published_time" content={publishedDate} />
+    {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
+    {author && <meta property="article:author" content={author} />}
+  </>
+)}
+
+<!-- Schema.org LocalBusiness (site-wide) -->
+<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+<!-- Additional schema slot for page-specific structured data -->
+<slot />
